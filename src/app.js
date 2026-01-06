@@ -5,7 +5,7 @@ const routes = require('./routes')
 const app = express()
 const sequelize = require('./config/database')
 
-sequelize.sync()
+//sequelize.sync()
 
 app.use(cors())
 app.use(express.json())
