@@ -3,6 +3,7 @@ const sequelize = require('../config/database');
 const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc');
 const timezone = require('dayjs/plugin/timezone');
+const bcrypt = require('bcryptjs')
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -10,6 +11,7 @@ dayjs.extend(timezone);
 const User = sequelize.define('User', {
   nome: DataTypes.STRING,
   email: DataTypes.STRING,
+  senha: DataTypes.STRING,
   data_cadastro: {
     type: DataTypes.DATE,
     field: 'data_cadastro',
@@ -36,6 +38,12 @@ const User = sequelize.define('User', {
   createdAt: 'data_cadastro',
   updatedAt: 'data_atualizado'
 });
+
+User.beforeSave(async user => {
+  if (user.senha) {
+    user.senha = await bcrypt.hash(user.senha, 10)
+  }
+})
 
 User.prototype.toJSON = function () {
   const values = Object.assign({}, this.get());

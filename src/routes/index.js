@@ -1,13 +1,18 @@
 const { Router } = require('express')
 const UserController = require('../controllers/UserController')
+const AuthController = require('../controllers/AuthController')
+const authMiddleware = require('../middlewares/auth')
 
 const routes = Router()
 
-routes.get('/users-mocks', UserController.listarMocks)
+routes.post('/registrar', AuthController.register)
+routes.post('/login', AuthController.login)
 
-routes.get('/users', UserController.listar)
-routes.post('/user', UserController.criar)
-routes.put('/user/:id', UserController.atualizar)
-routes.delete('/user/:id', UserController.deletar)
+// Rotas protegidas
+
+routes.get('/users', authMiddleware, UserController.listar)
+routes.post('/user', authMiddleware, UserController.criar)
+routes.put('/user/:id', authMiddleware, UserController.atualizar)
+routes.delete('/user/:id', authMiddleware, UserController.deletar)
 
 module.exports = routes

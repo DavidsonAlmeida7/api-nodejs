@@ -12,7 +12,13 @@ const sequelize = new Sequelize(
     timezone: '-03:00', // horário de São Paulo
 
     dialectOptions: {
-      timezone: 'local'
+      timezone: 'local',
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_unicode_ci'
+    },
+    define: {
+     charset: 'utf8mb4',
+     collate: 'utf8mb4_unicode_ci'
     }
   }
 )

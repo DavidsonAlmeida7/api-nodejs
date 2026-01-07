@@ -22,6 +22,10 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true
       },
+      senha: {
+        type: Sequelize.STRING,
+        unique: true
+      },
       data_cadastro: {
         type: Sequelize.DATE,
         allowNull: false

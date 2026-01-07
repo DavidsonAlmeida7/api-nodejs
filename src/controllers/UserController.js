@@ -49,17 +49,6 @@ class UserController {
       throw new Error(error.message, error);
     }
   }
-
-  listarMocks(req, res) {
-    return res.json([
-      { id: 1, nome: 'Davidson' },
-      { id: 2, nome: 'João' },
-      { id: 3, nome: 'Maria' },
-      { id: 4, nome: 'Carlos' },
-      { id: 5, nome: 'Debora' },
-      { id: 6, nome: 'Oliveira' },
-    ])
-  }
 }
 
 module.exports = new UserController()
